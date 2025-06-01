@@ -60,6 +60,14 @@
         },
         "serve": {
           "builder": "@angular/build:dev-server",
+          "options": { // <-- ADD THESE LINES HERE
+            "host": "0.0.0.0",
+            "allowedHosts": [
+              "admin.d3v.ninja",
+              "localhost",
+              "127.0.0.1"
+            ]
+          },
           "configurations": {
             "production": {
               "buildTarget": "ColorTheVillageDashboard:build:production"
@@ -85,7 +93,7 @@
             "assets": [
               {
                 "glob": "**/*",
-                "input": "public, node_modules/tinymce", 
+                "input": "public, node_modules/tinymce",
                 "output": "/tinymce/"
               }
             ],
