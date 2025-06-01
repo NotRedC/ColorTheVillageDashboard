@@ -5,6 +5,8 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialog } from '@angular/material/dialog';
 import { VolunteerHistory } from '../volunteer-history/volunteer-history';
+import { RegularVolunteer } from '../models/regular-volunteer.model';
+import { VolunteerService } from '../services/volunteer-service';
 
 
 
@@ -15,7 +17,7 @@ import { VolunteerHistory } from '../volunteer-history/volunteer-history';
   styleUrl: './volunteers.scss'
 })
 export class Volunteers implements AfterViewInit {
-  constructor(private dialog: MatDialog) {}
+  constructor(private dialog: MatDialog, private volunteerService: VolunteerService) {}
   displayedColumns = [
   'profile',
   'email',
@@ -167,22 +169,29 @@ volunteers = [
   }
 ];
 
-  dataSource = new MatTableDataSource(this.volunteers);
+  dataSource = new MatTableDataSource<RegularVolunteer>([]);
+
 
   @ViewChild(MatSort) sort!: MatSort;
+
+  ngOnInit() {
+    this.volunteerService.getAllUsers().subscribe(volunteers => {
+      this.dataSource.data = volunteers;
+    });
+  }
 
   ngAfterViewInit() {
     this.dataSource.sort = this.sort;
 }
 
-  viewHistory(volunteer: any): void {
-  this.dialog.open(VolunteerHistory, {
-    width: '500px',
-    data: volunteer
-  });
+  viewHistory(volunteer: any): void{
+    this.dialog.open(VolunteerHistory, {
+      width: '500px',
+      data: { volunteerId: volunteer.id } // or any identifier needed for fetching
+    });
+  }
 }
 
-}
 
 
 

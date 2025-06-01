@@ -1,9 +1,15 @@
-export interface RegularVolunteer{
-    idVolunteerReg: number,
-    nameVolunteer: string,
-    emailVolunteer: string,
-    phoneVolunteer: string,
-    addressVolunteer: string,
-    ageVolunteer: number,
-
+export interface RegularVolunteer {
+  id: string;
+  firstName: string;
+  surName: string;
+  phone?: string;
+  mail: string;
+  age?: string;
+  sex?: string;
+  foodPreferences?: string;
+  industry?: string;
+  experienceInYears?: string;
+  company?: string;
+  shirtSize?: string;
+  profileImageUrl?: string;
 }
