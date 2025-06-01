@@ -1,0 +1,74 @@
+<h2>Volunteers</h2>
+<mat-table [dataSource]="dataSource" matSort class="mat-elevation-z2 zebra-table">
+
+  <!-- Profile column with image and name -->
+  <ng-container matColumnDef="profile">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+    <mat-cell *matCellDef="let v">
+      <div class="profile-cell">
+        <img [src]="v.photoUrl" alt="{{ v.name }}" /> 
+        <span>{{ v.name }}</span>
+      </div>
+    </mat-cell>
+  </ng-container>
+
+  <!-- Repeat for each column -->
+  <ng-container matColumnDef="email">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
+    <mat-cell *matCellDef="let v"><span [matTooltip]="v.email" class="long-cell"> {{ v.email }} </span> </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="phone">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Phone </mat-header-cell>
+    <mat-cell *matCellDef="let v"><span [matTooltip]="v.phone" class="long-cell"> {{ v.phone }} </span> </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="age">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Age </mat-header-cell>
+    <mat-cell *matCellDef="let v" class="right-align"> {{ v.age }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="gender">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Gender </mat-header-cell>
+    <mat-cell *matCellDef="let v"> {{ v.gender }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="mealOption">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Meal </mat-header-cell>
+    <mat-cell *matCellDef="let v"> {{ v.mealOption }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="fieldOfWork">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Field </mat-header-cell>
+    <mat-cell *matCellDef="let v"> {{ v.fieldOfWork }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="jobExperience">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Experience </mat-header-cell>
+    <mat-cell *matCellDef="let v"> {{ v.jobExperience }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="job">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Job </mat-header-cell>
+    <mat-cell *matCellDef="let v"> {{ v.job }} </mat-cell>
+  </ng-container>
+
+  <ng-container matColumnDef="workplace">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Workplace </mat-header-cell>
+    <mat-cell *matCellDef="let v"> {{ v.workplace }} </mat-cell>
+  </ng-container>
+
+    <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+    <mat-cell *matCellDef="let v">
+        <button mat-stroked-button color="primary" (click)="viewHistory(v)">
+        View History
+        </button>
+    </mat-cell>
+    </ng-container>
+
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+</mat-table>
+

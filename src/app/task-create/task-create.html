@@ -1,0 +1,18 @@
+<h2 mat-dialog-title>
+  {{ mode === 'edit' ? 'Edit Task' : 'Create Task' }}
+</h2>
+<mat-dialog-content>
+  <mat-form-field appearance="outline" class="full-width">
+    <mat-label>Task Name</mat-label>
+    <input matInput [(ngModel)]="taskName" />
+    <mat-error *ngIf="isDuplicate()">This task already exists.</mat-error>
+  </mat-form-field>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-flat-button color="primary"
+          (click)="save()"
+          [disabled]="!taskName.trim() || isDuplicate()">
+    {{ mode === 'edit' ? 'Update' : 'Save' }}
+  </button>
+</mat-dialog-actions>

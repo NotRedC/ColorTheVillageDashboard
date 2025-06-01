@@ -1,0 +1,39 @@
+.dialog-title {
+  font-size: 1.3rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+  color: #333;
+}
+
+.event-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding-top: 0.5rem;
+}
+
+.event-item {
+  padding: 0.75rem 1rem;
+  border-radius: 8px;
+  background-color: #f5f5f5;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border: 1px solid #e0e0e0;
+
+  .event-name {
+    font-weight: 500;
+    color: #222;
+  }
+
+  .event-date {
+    font-size: 0.875rem;
+    color: #666;
+  }
+}
+
+.no-events {
+  font-style: italic;
+  padding: 1rem 0;
+  color: #777;
+}

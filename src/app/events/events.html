@@ -1,0 +1,57 @@
+<h2 class="section-title">Ongoing Events</h2>
+
+<div class="table-header">
+  <button mat-flat-button color="primary" (click)="createEvent()">+ Create Event</button>
+  <button mat-button (click)="viewEventHistory()">View History</button>
+</div>
+
+<mat-table [dataSource]="dataSource" matSort class="mat-elevation-z2 full-width-table zebra-table">
+
+  <!-- Event Name -->
+  <ng-container matColumnDef="name">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
+    <mat-cell *matCellDef="let event"> {{ event.name }} </mat-cell>
+  </ng-container>
+
+  <!-- Location -->
+  <ng-container matColumnDef="location">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Location </mat-header-cell>
+    <mat-cell *matCellDef="let event"> {{ event.location }} </mat-cell>
+  </ng-container>
+
+  <!-- Start Date -->
+  <ng-container matColumnDef="startDate">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> Start Date </mat-header-cell>
+    <mat-cell *matCellDef="let event"> {{ event.startDate | date }} </mat-cell>
+  </ng-container>
+
+  <!-- End Date -->
+  <ng-container matColumnDef="endDate">
+    <mat-header-cell *matHeaderCellDef mat-sort-header> End Date </mat-header-cell>
+    <mat-cell *matCellDef="let event"> {{ event.endDate | date }} </mat-cell>
+  </ng-container>
+
+  <!-- Confirmed Volunteers -->
+  <ng-container matColumnDef="confirmedVolunteers">
+    <mat-header-cell *matHeaderCellDef mat-sort-header>Total Volunteers </mat-header-cell>
+    <mat-cell #volunteersCell *matCellDef="let event"> 
+    {{ event.confirmedVolunteers.length }} 
+    </mat-cell>
+  </ng-container>
+
+  <!-- Actions -->
+  <ng-container matColumnDef="actions">
+    <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+    <mat-cell *matCellDef="let event">
+      <button mat-icon-button color="primary" (click)="editEvent(event); $event.stopPropagation()" matTooltip="Edit Event">
+        <mat-icon>edit</mat-icon>
+      </button>
+      <button mat-icon-button color="accent" (click)="archiveEvent(event); $event.stopPropagation()" matTooltip="Archive Event">
+        <mat-icon>archive</mat-icon>
+      </button>
+    </mat-cell>
+  </ng-container>
+
+  <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+  <mat-row *matRowDef="let row; columns: displayedColumns;" (click)="viewVolunteers(row)"></mat-row>
+</mat-table>

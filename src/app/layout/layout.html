@@ -1,0 +1,51 @@
+<mat-sidenav-container class="sidenav-container">
+    <mat-sidenav #drawer mode="side" class="sidenav">
+      <mat-toolbar color="primary">
+        <a routerLink="/" class="logo-link">
+          <mat-icon>home</mat-icon>
+          <span>Acasă în Banat</span>  
+        </a>
+      </mat-toolbar>
+      <mat-nav-list>
+        <a
+          mat-list-item
+          routerLink="/volunteers"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }">
+          Volunteers
+        </a>
+        <a
+          mat-list-item
+          routerLink="/events"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }">
+          Events
+        </a>
+        <a
+          mat-list-item
+          routerLink="/tasks"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }">
+          Tasks
+        </a>
+        <a
+          mat-list-item
+          routerLink="/donations"
+          routerLinkActive="active-link"
+          [routerLinkActiveOptions]="{ exact: true }">
+          Donations
+        </a>
+      </mat-nav-list>
+    </mat-sidenav>
+  
+    <mat-sidenav-content>
+         <mat-toolbar color="primary">
+        <button mat-icon-button (click)="drawer.toggle()" class="menu-btn">
+        <mat-icon>menu</mat-icon></button>
+      </mat-toolbar>
+      <div class="main-content">
+        <router-outlet></router-outlet>
+      </div>
+    </mat-sidenav-content>
+  </mat-sidenav-container>
+  

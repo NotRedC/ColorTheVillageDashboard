@@ -1,0 +1,21 @@
+<h2 mat-dialog-title class="dialog-title">
+  Event History – {{ volunteer.name }}
+</h2>
+
+<mat-dialog-content *ngIf="volunteer.events?.length; else noEvents">
+  <div class="event-list">
+    <div class="event-item" *ngFor="let event of volunteer.events">
+        <mat-icon color="primary">event</mat-icon>
+      <div class="event-name">{{ event.name }}</div>
+      <div class="event-date">{{ event.date }}</div>
+    </div>
+  </div>
+</mat-dialog-content>
+
+<ng-template #noEvents>
+  <p class="no-events">This volunteer hasn't participated in any events yet.</p>
+</ng-template>
+
+<mat-dialog-actions align="end">
+  <button mat-flat-button color="primary" mat-dialog-close>Close</button>
+</mat-dialog-actions>

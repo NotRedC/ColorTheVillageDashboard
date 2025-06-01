@@ -1,0 +1,45 @@
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 2.5rem;
+  margin: 3rem auto;
+  max-width: 100%;
+}
+
+@media (max-width: 900px) {
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 2rem 0.5rem;
+    max-width: 100%;
+  }
+}
+
+.dashboard-card {
+  padding: 1.5rem;
+  display: flex;
+  flex-direction: row-reverse;
+  align-items: center;
+  justify-content: center;
+  min-height: 120px;
+}
+
+.dashboard-card-content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.dashboard-card h2 {
+  margin: 0;
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #69221c;
+}
+
+.dashboard-card p {
+  margin: 0;
+  color: #44474e;
+}

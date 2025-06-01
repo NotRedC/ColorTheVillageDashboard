@@ -1,0 +1,33 @@
+<h2 mat-dialog-title>Volunteers by Task – {{ data.event.name }}</h2>
+<mat-dialog-content>
+  <mat-accordion>
+    <mat-expansion-panel *ngFor="let task of data.event.tasks">
+      <mat-expansion-panel-header>
+        <mat-panel-title>
+          {{ task.taskName }}
+        </mat-panel-title>
+        <mat-panel-description>
+          ({{ getVolunteersForTask(task.taskId!).length }} volunteers)
+        </mat-panel-description>
+      </mat-expansion-panel-header>
+      <mat-table [dataSource]="getVolunteersForTask(task.taskId!)"  class="mat-elevation-z1 zebra-table">
+        <ng-container matColumnDef="volunteerName">
+          <mat-header-cell *matHeaderCellDef>Name</mat-header-cell>
+          <mat-cell *matCellDef="let volunteer">{{ volunteer.volunteerName }}</mat-cell>
+        </ng-container>
+        <ng-container matColumnDef="volunteerEmail">
+          <mat-header-cell *matHeaderCellDef>Email</mat-header-cell>
+          <mat-cell *matCellDef="let volunteer">{{ volunteer.volunteerEmail }}</mat-cell>
+        </ng-container>
+        <mat-header-row *matHeaderRowDef=displayedColumns></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
+      </mat-table>
+      <p *ngIf="getVolunteersForTask(task.taskId!).length === 0" class="no-volunteers">
+        No volunteers assigned.
+      </p>
+    </mat-expansion-panel>
+  </mat-accordion>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="dialogRef.close()">Close</button>
+</mat-dialog-actions>

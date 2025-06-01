@@ -1,0 +1,45 @@
+.task-card {
+  margin-bottom: 1rem;
+}
+.no-volunteers {
+  font-style: italic;
+  padding-left: 1rem;
+}
+
+.zebra-table {
+  width: 100%;
+  margin-top: 1rem;
+  border: collapse;
+
+  mat-header-row {
+    background-color: #f7f9fc;
+    font-weight: 600;
+  }
+
+  mat-header-cell,
+  mat-cell {
+    font-size: 14px;
+    border-bottom: 1px solid #c4c6d0;
+  }
+
+  mat-row:nth-child(even) {
+    background-color: #f4f3f6; 
+  }
+
+  mat-row:nth-child(odd) {
+    background-color: white;
+  }
+
+  mat-row:hover {
+    background-color: #e9e7eb;
+    cursor: pointer;
+  }
+
+  mat-row:active {
+    background-color: #e3e2e6;
+  }
+
+  mat-cell.disabled {
+    color: #44474e;
+  }
+}

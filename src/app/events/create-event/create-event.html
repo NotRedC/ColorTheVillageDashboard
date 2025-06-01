@@ -1,0 +1,82 @@
+<h2 mat-dialog-title>Create New Event</h2>
+
+<form [formGroup]="eventForm" class="form-container">
+
+  <mat-form-field appearance="fill">
+    <mat-label>Event Name</mat-label>
+    <input matInput formControlName="name" required>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>Location</mat-label>
+    <input matInput formControlName="location" required>
+  </mat-form-field>
+  <div class="form-section">
+  <mat-form-field appearance="fill">
+    <mat-label>Start Date</mat-label>
+    <input matInput [matDatepicker]="startPicker" formControlName="startDate" required>
+    <mat-datepicker-toggle matSuffix [for]="startPicker"></mat-datepicker-toggle>
+    <mat-datepicker #startPicker></mat-datepicker>
+  </mat-form-field>
+
+  <mat-form-field appearance="fill">
+    <mat-label>End Date</mat-label>
+    <input matInput [matDatepicker]="endPicker" formControlName="endDate" required [min]="eventForm.get('startDate')?.value">
+    <mat-datepicker-toggle matSuffix [for]="endPicker"></mat-datepicker-toggle>
+    <mat-datepicker #endPicker></mat-datepicker>
+  </mat-form-field>
+    <mat-error *ngIf="eventForm.hasError('endBeforeStart') && eventForm.get('endDate')?.touched">
+        End date cannot be before start date.
+    </mat-error>
+  </div>
+
+  <div class="form-section">
+    <label class="form-label">Cover Photo:</label>
+    <input #fileInput type="file" (change)="onFileSelected($event)" accept="image/*" hidden>
+    <button mat-stroked-button color="primary" (click)="fileInput.click()">
+      <mat-icon>upload</mat-icon> Upload Cover Photo
+    </button>
+    <span *ngIf="selectedCoverPhotoBase64" class="file-selected-label">Image selected</span>
+  </div>
+
+  <div class="form-section">
+    <label class="form-label">Tasks<span class="mat-form-field-required-marker" aria-hidden="true">*</span>
+    </label>
+    <mat-selection-list formControlName="tasks" >
+      <mat-list-option *ngFor="let task of availableTasks" [value]="task">
+        {{ task.taskName }}
+      </mat-list-option>
+    </mat-selection-list>
+    <mat-error *ngIf="eventForm.get('tasks')?.invalid && eventForm.get('tasks')?.touched">
+    Please select at least one task.
+    </mat-error>
+  </div>
+
+  <div class="form-section">
+  <mat-checkbox formControlName="accommodation">Accommodation</mat-checkbox>
+  <mat-checkbox formControlName="accommodationWithTent">Tent Accommodation</mat-checkbox>
+  <mat-checkbox formControlName="food">Food Provided</mat-checkbox>
+  </div>
+
+  <div class="form-section">
+    <mat-label>Other Prerequisites</mat-label>
+    <editor apiKey="x2jxa3c58vg2bttbm4nmkpy0r8avu9lw9u8mdi2qszn3d13q"
+    class="editor-tinymce"
+    formControlName="prerequisites"
+    [init]="{
+        height: 400,
+        menubar: false,
+        plugins: 'lists link paste',
+        toolbar: 'undo redo | formatselect | bold italic underline | bullist numlist | removeformat'
+    }"
+    ></editor>
+  </div>
+
+</form>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-flat-button color="primary" [disabled]="eventForm.invalid" (click)="createEvent()">
+    Create
+  </button>
+</mat-dialog-actions>
