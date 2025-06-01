@@ -3,7 +3,7 @@ import { MatCardModule } from '@angular/material/card';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { MatDialog, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
-import { CreateEvent } from '../events/create-event/create-event';
+//import { CreateEvent } from '../events/create-event/create-event';
 import { Event } from '../models/event.model';
 
 
@@ -15,10 +15,10 @@ import { Event } from '../models/event.model';
 })
 export class Dashboard {
    constructor(private dialog: MatDialog) {}
-  createEvent(): void {
-      const dialogRef = this.dialog.open(CreateEvent, {
-      width: '600px'
-    });
+  // createEvent(): void {
+  //     const dialogRef = this.dialog.open(CreateEvent, {
+  //     width: '600px'
+  //   });
     /*
     dialogRef.afterClosed().subscribe(result => {
       if (result) {
@@ -30,4 +30,4 @@ export class Dashboard {
     });
     */
 }
-}
+

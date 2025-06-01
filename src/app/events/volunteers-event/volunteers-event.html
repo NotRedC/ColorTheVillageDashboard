@@ -1,4 +1,4 @@
-<h2 mat-dialog-title>Volunteers by Task – {{ data.event.name }}</h2>
+<!-- <h2 mat-dialog-title>Volunteers by Task – {{ data.event.name }}</h2>
 <mat-dialog-content>
   <mat-accordion>
     <mat-expansion-panel *ngFor="let task of data.event.tasks">
@@ -22,7 +22,7 @@
         <mat-header-row *matHeaderRowDef=displayedColumns></mat-header-row>
         <mat-row *matRowDef="let row; columns: displayedColumns"></mat-row>
       </mat-table>
-      <p *ngIf="getVolunteersForTask(task.taskId!).length === 0" class="no-volunteers">
+      <!--<p *ngIf="getVolunteersForTask(task.taskId!).length === 0" class="no-volunteers">
         No volunteers assigned.
       </p>
     </mat-expansion-panel>
@@ -30,4 +30,4 @@
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button (click)="dialogRef.close()">Close</button>
-</mat-dialog-actions>
+</mat-dialog-actions> -->

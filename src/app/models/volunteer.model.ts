@@ -1,6 +1,6 @@
 export interface EventVolunteer {
-    volunteerId: number;
-    assignedTaskIds: number[];
+    volunteerId: string;
+    assignedTaskIds: string[];
     volunteerName: string;
     volunteerEmail: string;
 }

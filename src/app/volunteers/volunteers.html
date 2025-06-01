@@ -6,8 +6,7 @@
     <mat-header-cell *matHeaderCellDef mat-sort-header> Name </mat-header-cell>
     <mat-cell *matCellDef="let v">
       <div class="profile-cell">
-        <img [src]="v.photoUrl" alt="{{ v.name }}" /> 
-        <span>{{ v.name }}</span>
+        <span>{{ v.firstName + " " + v.surName }}</span>
       </div>
     </mat-cell>
   </ng-container>
@@ -15,7 +14,7 @@
   <!-- Repeat for each column -->
   <ng-container matColumnDef="email">
     <mat-header-cell *matHeaderCellDef mat-sort-header> Email </mat-header-cell>
-    <mat-cell *matCellDef="let v"><span [matTooltip]="v.email" class="long-cell"> {{ v.email }} </span> </mat-cell>
+    <mat-cell *matCellDef="let v"><span [matTooltip]="v.mail" class="long-cell"> {{ v.mail }} </span> </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="phone">
@@ -30,32 +29,28 @@
 
   <ng-container matColumnDef="gender">
     <mat-header-cell *matHeaderCellDef mat-sort-header> Gender </mat-header-cell>
-    <mat-cell *matCellDef="let v"> {{ v.gender }} </mat-cell>
+    <mat-cell *matCellDef="let v"> {{ v.sex }} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="mealOption">
     <mat-header-cell *matHeaderCellDef mat-sort-header> Meal </mat-header-cell>
-    <mat-cell *matCellDef="let v"> {{ v.mealOption }} </mat-cell>
+    <mat-cell *matCellDef="let v"> {{ v.foodPreferences }} </mat-cell>
   </ng-container>
 
-  <ng-container matColumnDef="fieldOfWork">
-    <mat-header-cell *matHeaderCellDef mat-sort-header> Field </mat-header-cell>
-    <mat-cell *matCellDef="let v"> {{ v.fieldOfWork }} </mat-cell>
-  </ng-container>
 
   <ng-container matColumnDef="jobExperience">
     <mat-header-cell *matHeaderCellDef mat-sort-header> Experience </mat-header-cell>
-    <mat-cell *matCellDef="let v"> {{ v.jobExperience }} </mat-cell>
+    <mat-cell *matCellDef="let v"> {{ v.experienceInYears }} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="job">
     <mat-header-cell *matHeaderCellDef mat-sort-header> Job </mat-header-cell>
-    <mat-cell *matCellDef="let v"> {{ v.job }} </mat-cell>
+    <mat-cell *matCellDef="let v"> {{ v.industry }} </mat-cell>
   </ng-container>
 
   <ng-container matColumnDef="workplace">
     <mat-header-cell *matHeaderCellDef mat-sort-header> Workplace </mat-header-cell>
-    <mat-cell *matCellDef="let v"> {{ v.workplace }} </mat-cell>
+    <mat-cell *matCellDef="let v"> {{ v.company }} </mat-cell>
   </ng-container>
 
     <ng-container matColumnDef="actions">

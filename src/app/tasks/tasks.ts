@@ -9,6 +9,7 @@ import { TaskCreate } from '../task-create/task-create';
 import { ConfirmDialog } from '../confirm-dialog/confirm-dialog';
 import { TaskService } from '../services/task';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { Task } from '../models/task.model';
 
 @Component({
   selector: 'app-tasks',
@@ -21,16 +22,17 @@ export class Tasks implements AfterViewInit {
   }
   displayedColumns = ['taskName', 'actions'];
 
-  tasks = [
-    { taskId: 1, taskName: 'Clean brushes' },
-    { taskId: 2, taskName: 'Prepare scaffolding' },
-    { taskId: 3, taskName: 'Paint main entrance' }
-  ];
+  tasks: Task[]=[];
 
   dataSource!: MatTableDataSource<any>;
   ngOnInit(){
-    this.taskService.setTasks(this.tasks);
-    this.dataSource = new MatTableDataSource(this.tasks);
+    this.taskService.fetchTasks().subscribe((tasks) => {
+      this.tasks = tasks;
+      this.dataSource = new MatTableDataSource(this.tasks);
+      if (this.sort) {
+        this.dataSource.sort = this.sort;
+      }
+    });
   }
   
     @ViewChild(MatSort) sort!: MatSort;
@@ -39,48 +41,50 @@ export class Tasks implements AfterViewInit {
       this.dataSource.sort = this.sort;
   }
 
-  editTask(task: any): void {
-    const dialogRef = this.dialog.open(TaskCreate, {
-    width: '400px',
-    data: {
-      mode: 'edit',
-      taskName: task.taskName,
-      existingNames: this.tasks
-        .filter(t => t.taskId !== task.taskId) // exclude current task
-        .map(t => t.taskName.toLowerCase())
-    }
-  });
-  dialogRef.afterClosed().subscribe(result => {
-    if (result) {
-      // Update the task's name
-      task.taskName = result;
-      this.dataSource.data = [...this.tasks]; // refresh table
-    }
-  });
-  }
+  // editTask(task: any): void {
+  //   const dialogRef = this.dialog.open(TaskCreate, {
+  //   width: '400px',
+  //   data: {
+  //     mode: 'edit',
+  //     taskName: task.taskName,
+  //     existingNames: this.tasks
+  //       .filter(t => t.taskId !== task.taskId) // exclude current task
+  //       .map(t => t.taskName.toLowerCase())
+  //   }
+  // });
+  // dialogRef.afterClosed().subscribe(result => {
+  //   if (result) {
+  //     // Update the task's name
+  //     task.taskName = result;
+  //     this.dataSource.data = [...this.tasks]; // refresh table
+  //   }
+  // });
+  // }
 
-  deleteTask(task: any): void {
-    const dialogRef = this.dialog.open(ConfirmDialog);
+  // deleteTask(task: any): void {
+  //   const dialogRef = this.dialog.open(ConfirmDialog);
 
-  dialogRef.afterClosed().subscribe(result => {
-    if (result) {
-      this.tasks = this.tasks.filter(t => t.taskId !== task.taskId);
-      this.dataSource.data = [...this.tasks];
-    }
-  });
-  }
+  // dialogRef.afterClosed().subscribe(result => {
+  //   if (result) {
+  //     this.tasks = this.tasks.filter(t => t.taskId !== task.taskId);
+  //     this.dataSource.data = [...this.tasks];
+  //   }
+  // });
+  // }
 
   createTask(): void {
   const dialogRef = this.dialog.open(TaskCreate, {
     width: '400px',
     data: {
-      existingNames: this.tasks.map(task => task.taskName.toLowerCase())
+      existingNames: this.tasks.map(task => task.name.toLowerCase())
     }  });
 
   dialogRef.afterClosed().subscribe(result => {
     if (result) {
-      this.tasks.push({taskId: Date.now(), taskName: result});
-      this.dataSource.data = [...this.tasks]; // refresh table
+      this.taskService.addTask({id: Date.now(), name: result}).subscribe(newTask => {
+        this.tasks.push({id: Date.now(), name: result});
+        this.dataSource.data = [...this.tasks]; // refresh table
+      });
     }
   });
 

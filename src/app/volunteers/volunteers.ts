@@ -25,7 +25,6 @@ export class Volunteers implements AfterViewInit {
   'age',
   'gender',
   'mealOption',
-  'fieldOfWork',
   'jobExperience',
   'job',
   'workplace',
