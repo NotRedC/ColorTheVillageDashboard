@@ -12,4 +12,5 @@ export interface RegularVolunteer {
   company?: string;
   shirtSize?: string;
   profileImageUrl?: string;
+  isAdmin?: boolean;
 }
